@@ -5,7 +5,7 @@ import Searchbox from './Searchbox';
 
 export default function Navbar() {
     return (
-        <nav className="shadow-sm sticky top-0 left-0 bg-white">
+        <nav className="shadow-sm sticky top-0 left-0 bg-white z-50">
             <div className="h-[80px] w-full flex justify-between items-center px-3 max-w-7xl mx-auto">
                 <div className="flex items-center justify-center gap-2">
                     <h2 className="text-gray-500 text-3xl">
