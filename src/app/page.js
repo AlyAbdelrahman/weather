@@ -6,6 +6,7 @@ import TempratureBox from "@/components/TempratureBox";
 import Date from "@/components/Date";
 import Loader from "@/components/Loader";
 import { fetchWeather } from "@/utils/apiServices";
+import WeatherDetails from "@/components/WeatherDetails";
 
 
 
@@ -16,7 +17,7 @@ export default function Home() {
   });
   const firstData = data?.list[0];
 
-  if (isLoading) return <Loader/>
+  if (isLoading) return <Loader />
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
@@ -31,6 +32,11 @@ export default function Home() {
               <TempratureBox data={firstData} />
               {/* time and weather icon */}
               <HourlyWeatherBox data={data} />
+            </div>
+            <div className="w-full bg-white border rounded-xl flex py-10 shadow-sm gap-10 px-6 items-center">
+              <div className="flex w-full justify-around">
+                <WeatherDetails data={firstData} />
+              </div>
             </div>
           </div>
         </section>
