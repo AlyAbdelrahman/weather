@@ -1,5 +1,7 @@
 import React from 'react';
 import { MdSunny } from 'react-icons/md'
+import Searchbox from './Searchbox';
+
 
 export default function Navbar() {
     return (
@@ -12,9 +14,7 @@ export default function Navbar() {
                     <MdSunny className='text-yellow-300 text-3xl mt-1'/>
                 </p>
                 {/* */}
-                <section>
-
-                </section>
+                <Searchbox/>
             </div>
         </nav>
     )
