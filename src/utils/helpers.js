@@ -23,3 +23,7 @@ export function getFormattedDateFromTimestamp(timestamp) {
     return `${month}.${day}.${year}`;
 }
 
+export function convertKelvinToCelsius(tempInKelvin) {
+    const tempInCelsius = tempInKelvin - 273.15;
+    return Math.floor(tempInCelsius);
+  }
