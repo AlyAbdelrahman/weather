@@ -26,13 +26,18 @@ export function getFormattedDateFromTimestamp(timestamp) {
 export function convertKelvinToCelsius(tempInKelvin) {
     const tempInCelsius = tempInKelvin - 273.15;
     return Math.floor(tempInCelsius);
-  }
+}
 
 
-  export function getDayOrNightIcon( iconName,dateTimeString) {
-    const hours = new Date(dateTimeString).getHours(); 
-  
-    const isDayTime = hours >= 6 && hours < 18; 
-  
+export function getDayOrNightIcon(iconName, dateTimeString) {
+    const hours = new Date(dateTimeString).getHours();
+
+    const isDayTime = hours >= 6 && hours < 18;
+
     return isDayTime ? iconName.replace(/.$/, "d") : iconName.replace(/.$/, "n");
-  }
+}
+
+export function convertWindSpeed(speedInMetersPerSecond) {
+    const speedInKilometersPerHour = speedInMetersPerSecond * 3.6; 
+    return `${speedInKilometersPerHour.toFixed(0)}km/h`;
+}

@@ -4,7 +4,7 @@ import { FiDroplet } from "react-icons/fi";
 import { MdAir } from "react-icons/md";
 import { ImMeter } from "react-icons/im";
 import WeatherIcon from "./WeatherIcon";
-import { getDayOrNightIcon } from "@/utils/helpers";
+import { convertWindSpeed, getDayOrNightIcon } from "@/utils/helpers";
 
 export default function WeatherDetails(props) {
     const {
@@ -29,17 +29,17 @@ export default function WeatherDetails(props) {
             <SingleWeatherDetail
                 icon={<FiDroplet />}
                 information="Humidity"
-                value={main.humidity}
+                value={`${main.humidity}%`}
             />
             <SingleWeatherDetail
                 icon={<MdAir />}
                 information="Wind Speed"
-                value={wind.speed}
+                value={convertWindSpeed(wind.speed)}
             />
             <SingleWeatherDetail
                 icon={<ImMeter />}
                 information="Air Pressure"
-                value={main.pressure}
+                value={`${main.pressure} hPa`}
             />
 
         </>
