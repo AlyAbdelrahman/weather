@@ -38,6 +38,21 @@ export function getDayOrNightIcon(iconName, dateTimeString) {
 }
 
 export function convertWindSpeed(speedInMetersPerSecond) {
-    const speedInKilometersPerHour = speedInMetersPerSecond * 3.6; 
+    const speedInKilometersPerHour = speedInMetersPerSecond * 3.6;
     return `${speedInKilometersPerHour.toFixed(0)}km/h`;
+}
+
+export function getFilteredUniqueDates(data) {
+    const unFilteredUniqueDates = [...new Set(
+        data?.list.map(
+            (entry) => new Date(entry.dt * 1000).toISOString().split("T")[0]
+        )
+    )];
+    return unFilteredUniqueDates.map((date) => {
+        return data?.list.find((entry) => {
+            const entryDate = new Date(entry.dt * 1000).toISOString().split("T")[0];
+            const entryTime = new Date(entry.dt * 1000).getHours();
+            return entryDate === date && entryTime >= 6;
+        });
+    });
 }

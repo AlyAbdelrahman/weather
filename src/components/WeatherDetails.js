@@ -5,6 +5,8 @@ import { MdAir } from "react-icons/md";
 import { ImMeter } from "react-icons/im";
 import WeatherIcon from "./WeatherIcon";
 import { convertWindSpeed, getDayOrNightIcon } from "@/utils/helpers";
+import TempratureBox from "./TempratureBox";
+import { format, parseISO } from "date-fns";
 
 export default function WeatherDetails(props) {
     const {
@@ -13,8 +15,17 @@ export default function WeatherDetails(props) {
         weather,
         dt_txt
     } = props.data;
+    {console.log(props.data)}
     return (
         <>
+            {props.showDay && <h2 className="flex gap-1 text-2xl  items-end ">
+                <p>{format(parseISO(dt_txt ?? ""), "EEEE")}</p>
+                <p className="text-lg">
+                    ({format(parseISO(dt_txt ?? ""), "dd.MM.yyyy")})
+                </p>
+            </h2>
+            }
+            {props.showDay && <TempratureBox data={props.data} />}
             <div>
                 <p className=" capitalize text-center">
                     {weather[0].description}{" "}

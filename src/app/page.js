@@ -7,6 +7,7 @@ import Date from "@/components/Date";
 import Loader from "@/components/Loader";
 import { fetchWeather } from "@/utils/apiServices";
 import WeatherDetails from "@/components/WeatherDetails";
+import { getFilteredUniqueDates } from "@/utils/helpers";
 
 
 
@@ -38,7 +39,23 @@ export default function Home() {
                 <WeatherDetails data={firstData} />
               </div>
             </div>
-          </div>
+
+
+            <h2 className="flex gap-1 text-2xl items-end">
+              <p>
+                Forcast (7 days)
+              </p>
+            </h2>
+              {getFilteredUniqueDates(data).map((dayData, index) => (
+                index > 0 && index < 8 && (
+                  <div className="w-full bg-white border rounded-xl flex py-10 shadow-sm gap-10 px-6 items-center">
+                    <div className="flex w-full justify-around">
+                      <WeatherDetails key={index} data={dayData} showDay/>
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
         </section>
       </main>
     </div>
