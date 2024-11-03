@@ -8,15 +8,23 @@ import Loader from "@/components/Loader";
 import { fetchWeather } from "@/utils/apiServices";
 import WeatherDetails from "@/components/WeatherDetails";
 import { getFilteredUniqueDates } from "@/utils/helpers";
+import { useAtom } from "jotai";
+import { loadingCityAtom, placeAtom } from "./atom";
+import { useEffect } from "react";
 
 
 
 export default function Home() {
-  const { data, error, isLoading } = useQuery({
+  const [place, setPlace] = useAtom(placeAtom);
+  const [loadingCity] = useAtom(loadingCityAtom);
+  const { data, error, isLoading, refetch } = useQuery({
     queryKey: 'weatherData',
-    queryFn: () => fetchWeather('london'),
+    queryFn: () => fetchWeather(place),
   });
   const firstData = data?.list[0];
+  useEffect(() => {
+    refetch();
+  }, [place, refetch]);
 
   if (isLoading) return <Loader />
   if (error) return <div>Error: {error.message}</div>;
