@@ -15,15 +15,16 @@ export default function WeatherDetails(props) {
         weather,
         dt_txt
     } = props.data;
-    {console.log(props.data)}
+    { console.log(props.data) }
     return (
         <>
-            {props.showDay && <h2 className="flex gap-1 text-2xl  items-end ">
+            {props.showDay && <div className="flex justify-center items-center h-full"> <h2 className="flex gap-1 text-2xl  items-end ">
                 <p>{format(parseISO(dt_txt ?? ""), "EEEE")}</p>
                 <p className="text-lg">
                     ({format(parseISO(dt_txt ?? ""), "dd.MM.yyyy")})
                 </p>
             </h2>
+            </div>
             }
             {props.showDay && <TempratureBox data={props.data} />}
             <div>

@@ -49,7 +49,7 @@ export default function Home() {
               {getFilteredUniqueDates(data).map((dayData, index) => (
                 index > 0 && index < 8 && (
                   <div className="w-full bg-white border rounded-xl flex py-10 shadow-sm gap-10 px-6 items-center">
-                    <div className="flex w-full justify-around">
+                    <div className="flex w-full justify-around items-center">
                       <WeatherDetails key={index} data={dayData} showDay/>
                     </div>
                   </div>
