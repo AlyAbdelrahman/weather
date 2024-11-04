@@ -3,11 +3,10 @@
 import React, { useState } from "react";
 import { MdOutlineLocationOn, MdWbSunny } from "react-icons/md";
 import { MdMyLocation } from "react-icons/md";
-import { loadingCityAtom, placeAtom } from "@/app/atom";
+import { loadingCityAtom, placeAtom, displaySearchAtom } from "@/app/atom";
 import { useAtom, atom } from "jotai";
 import Searchbox from "./Searchbox";
 
-const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
 export default function Navbar({ location }) {
   const [city, setCity] = useState("");
@@ -16,13 +15,14 @@ export default function Navbar({ location }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [place, setPlace] = useAtom(placeAtom);
   const [_, setLoadingCity] = useAtom(loadingCityAtom);
+  const [isDisplaySearch, setIsDisplaySearch] = useAtom(displaySearchAtom);
 
   async function handleInputChange(value) {
     setCity(value);
     if (value.length >= 3) {
       try {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
         );
   
         if (!response.ok) {
@@ -59,12 +59,14 @@ export default function Navbar({ location }) {
     if (suggestions.length === 0) {
       setError("Location not found");
       setLoadingCity(false);
+      setIsDisplaySearch(false);
     } else {
       setError("");
       setTimeout(() => {
         setLoadingCity(false);
         setPlace(city);
         setShowSuggestions(false);
+        setIsDisplaySearch(true);
       }, 500);
     }
   }
